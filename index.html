@@ -87,7 +87,22 @@
     </section>
   </main>
 
+  <!-- TrackJS agent -->
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
   <script>
+    window.TrackJS && TrackJS.install({ 
+      token: "ae539417bf16418aa3d2769e84b40c2f"
+      // for more configuration options, see https://docs.trackjs.com
+    });
+  </script>
+                          
+  <script>
+    class CustomError extends Error {
+      constructor(message) {
+        super("Custom Error says: " + message);
+        this.name = 'CustomError';
+      }
+    }
     let output = document.querySelector('output');
 
     let form = document.querySelector('form');
@@ -96,7 +111,15 @@
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      try {
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      } catch (error_invalid) {
+        throw new CustomError(error_invalid);
+        // console.error(error_invalid);
+        TrackJS.track('Testing TrackJS!');
+      } finally {
+        console.log("Adding succeeded.")
+      }
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
