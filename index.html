@@ -128,6 +128,7 @@
     // You may move this JS to another file if you wish
 
     for (let i = 0; i < errorBtns.length; i++) {
+      var groupCnt = 0;
       errorBtns[i].addEventListener('click', () => {
         let buttonName = errorBtns[i].innerHTML;
 
@@ -151,9 +152,14 @@
         } else if (buttonName == "Console dirxml") {
           console.dirxml(errorBtns[i]);
         } else if (buttonName == "Console Group Start") {
-          console.group();
+          if (groupCnt == 0) {
+            console.group("newGroup");
+          } else {
+            console.info("groupCnt: " + groupCnt);
+          }
+          groupCnt++;
         } else if (buttonName == "Console Group End") {
-          console.groupEnd();
+          console.groupEnd("newGroup");
         } else if (buttonName == "Console Table") {
           console.table([{name: "H1bApplicant1", terrorist: "yes"},
                          {name: "Hitler", terrorist: "yes"},
