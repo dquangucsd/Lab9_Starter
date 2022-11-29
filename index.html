@@ -88,10 +88,11 @@
   </main>
 
   <script>
+    let output = document.querySelector('output');
+
     let form = document.querySelector('form');
     form.addEventListener('submit', e => {
       e.preventDefault();
-      let output = document.querySelector('output');
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
@@ -102,6 +103,60 @@
 
     // Start your code here
     // You may move this JS to another file if you wish
+
+    for (let i = 0; i < errorBtns.length; i++) {
+      errorBtns[i].addEventListener('click', () => {
+        let buttonName = errorBtns[i].innerHTML;
+
+        if (buttonName == 'Console Log') {
+          console.log("Console Log Demo");
+        } else if (buttonName == "Console Error") {
+          console.error("Console Error");
+        } else if (buttonName == "Console Count") {
+          let numPresses = output.innerHTML;
+          console.count("Count Button:  ${numPresses}");;
+        } else if (buttonName == "Console Warn") {
+          console.warn("Warning");
+        } else if (buttonName == "Console Assert") {
+          let valid = false;
+          let breakUp = "It's not you, it's me. This ain't gonna work.";
+          console.assert(valid === true, "%o", {valid, breakUp});
+        } else if (buttonName == "Console Clear") {
+          console.clear();
+        } else if (buttonName == "Console Dir") {
+          console.dir(errorBtns[count]);
+        } else if (buttonName == "Console dirxml") {
+          console.dirxml(errorBtns[i]);
+        } else if (buttonName == "Console Group Start") {
+          console.group();
+        } else if (buttonName == "Console Group End") {
+          console.groupEnd();
+        } else if (buttonName == "Console Table") {
+          console.table([{name: "H1bApplicant1", terrorist: "yes"},
+                         {name: "Hitler", terrorist: "yes"},
+                         {name: "Your mom", terrorist: "maybe"},
+                         {name: "Buddha", terrorist: "no"}]);
+        } else if (buttonName == "Start Timer") {
+          console.time("Timer Button");
+        } else if (buttonName == "End Timer") {
+          console.timeEnd("Timer Button");
+        } else if (buttonName == "Console Trace") {
+          function f1() {
+            function f2() {
+              function f3() {
+                console.trace();
+              }
+              f3();
+            }
+            f2();
+          }
+          f1();
+        } else if (buttonName == "Trigger a Global Error") {
+          (asdfasdf);
+        }
+      })
+      
+    };
   </script>
 </body>
 
